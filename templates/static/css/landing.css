@@ -1,0 +1,199 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    box-sizing: border-box;
+    font-family: 'Montserrat';
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+header {
+    height: 12vh;
+    padding: 0 40px;
+    justify-content: space-between;
+    background-color: #7335b7;
+    /* border-bottom: 2px solid white; */
+}
+
+header, nav {
+    display: flex;
+    align-items: center;
+}
+
+header a {
+    color: white;
+}
+
+nav {
+    justify-content: center;
+    gap: 10px;
+    height: 90%;
+    color: white;
+
+}
+
+.nav_link {
+    height: 80%;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    padding: 0 10px;
+    color: white;
+    font-weight: bold;
+}
+
+a {
+    text-decoration: none;
+}
+
+.nav_link:hover {
+    background-color: #ffffff;
+    color: black;
+    transition: 0.5s;
+}
+
+.profile_btn {
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center; 
+    padding: 2px; 
+}
+
+.profile_btn:hover {
+    background-color: #521f88;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+}
+
+.hero {
+    background-color: #7335b7;
+    color: white;
+    height: 80vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 5%;
+}
+
+.hero img {
+    width: 40%;
+    height: 100%;
+}
+
+.descricao_site {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 20px;
+}
+
+.ver_produtos {
+    background-color: #2fbe50;
+    border: none;
+    border-radius: 20px;
+    width: 80%;
+    height: 50px;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.ver_produtos:hover {
+    background-color: #218d3a;
+    transition: 0.5s;
+}
+
+.nossos_servicos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 60px 20px;
+}
+
+#nossos_servicos_titulo {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.nossos_servicos p {
+    width: 70%;
+    text-align: center;
+    font-weight: 400;
+}
+
+.servicos_container {
+    margin-top: 60px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 5%;
+}
+
+.servicos_container a {
+    width: 25%;
+    height: 50vh;
+    color: black;
+}
+
+.servico {
+    width: 100%;
+    height: 100%;
+    border: 1px solid gray;
+    box-shadow: gray 7px 5px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.servico:hover {
+    background-color: #7335b7;
+    color: white;
+    transition: 0.7s;
+}
+
+.servico_image {
+    width: 70%;
+    height: 40%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background: url('../img/money.png') no-repeat center;
+}
+
+.servico:hover .servico_image {
+    background: url('../img/money_white.png') no-repeat center;
+    transition: 0.7s;
+}
+
+.descricao_servico {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    width: 90%;
+    margin-top: 20px;
+}
+
+.descricao_servico p {
+    width: 100%;
+}

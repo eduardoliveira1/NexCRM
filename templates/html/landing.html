@@ -1,0 +1,112 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexCRM | Landing Page</title>
+    <link rel="stylesheet" href="{% static 'css/landing.css' %}">
+</head>
+<body>
+    <header>
+        <h3><a href="">NexCRM</a></h3>
+        <nav>
+            {% if autenticado %}
+            <p>Bem vindo,<b> {{ empresa_logada.dono_empresa }} </b></p>
+            <a class="profile_btn" href="{% url 'perfil' %}"><img src="{% static 'img/profile.png' %}" alt=""></a>
+            {% else %}
+            <a class="nav_link" href="">Logar como Usuário</a>
+            <a class="nav_link" href="{% url 'logar_empresa' %}">Logar como Empresa</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <img src="{% static 'img/hero.png' %}" alt="">
+            <div class="descricao_site">
+                <h1>O Marketplace Inteligente para Empresas e Consumidores</h1>
+                <h4>O NexCRM é uma plataforma inovadora que une empresas e consumidores em um marketplace dinâmico e eficiente!</h4>
+                <button href="{% url 'cadastrar_empresa' %}" class="ver_produtos">Ver produtos</button>
+            </div>
+        </section>
+        <section class="nossos_servicos">
+            <h1 id="nossos_servicos_titulo">Nossos Serviços</h1>
+            <p>No NexCRM, empresas podem se cadastrar, gerenciar seus produtos e oferecer seus itens para um público amplo, enquanto usuários podem explorar e comprar produtos diretamente pelo site.</p>
+            <div class="servicos_container">
+                <a href="{% url 'perfil' %}">
+
+                    <div class="servico">
+                        <div class="servico_image"></div>
+                        <div class="descricao_servico">
+                            <h3>Monitoramento do seu faturamento</h3>
+                            <p>Você consegue acompanhar seu faturamento em tempo real!</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <script >
+        function criar_servico(imagem_preta, imagem_branca, caminho_servico, titulo, descricao) {
+        const servicos = document.querySelector('.servicos_container');
+
+        const servico_a = document.createElement('a');
+        servico_a.href = caminho_servico
+
+        // Criando o container do serviço
+        const servico = document.createElement('div');
+        servico.className = 'servico';
+
+        // Criando a div da imagem do serviço
+        const servico_image = document.createElement('div');
+        servico_image.className = 'servico_image';
+        servico_image.style.backgroundImage = `url('${imagem_preta}')`; // Define a imagem inicial
+
+        // Adicionando evento de hover corretamente
+        servico.addEventListener("mouseenter", () => {
+            servico_image.style.backgroundImage = `url('${imagem_branca}')`;
+        });
+
+        servico.addEventListener("mouseleave", () => {
+            servico_image.style.backgroundImage = `url('${imagem_preta}')`;
+        });
+
+        // Criando o container de descrição
+        const descricao_servico = document.createElement('div');
+        descricao_servico.className = 'descricao_servico';
+
+        // Criando os elementos de texto
+        const h3_servico = document.createElement('h3');
+        h3_servico.textContent = titulo;
+
+        const p_servico = document.createElement('p');
+        p_servico.textContent = descricao;
+
+        // Montando a estrutura
+        descricao_servico.appendChild(h3_servico);
+        descricao_servico.appendChild(p_servico);
+
+        servico.appendChild(servico_image);
+        servico.appendChild(descricao_servico);
+
+        servico_a.appendChild(servico)
+        servicos.appendChild(servico_a)
+        // servicos.appendChild(servico);
+    }
+        const gerenciamento_img_preta = "{% static 'img/wrench.png' %}"
+        const gerenciamento_img_branca = "{% static 'img/wrench_white.png' %}"
+        const gerenciamento_link = "{% url 'home' %}"
+
+        const venda_img_preta = "{% static 'img/cart.png' %}"
+        const venda_img_branca = "{% static 'img/cart_white.png' %}"
+        const venda_link = "{% url 'cadastrar_empresa' %}"
+
+        criar_servico(gerenciamento_img_preta, gerenciamento_img_branca, gerenciamento_link, "Gerenciamento de seus produtos", "Você possui controle total de seus produtos, podendo adicionar, remover e até mesmo editar seus produtos!");
+
+        criar_servico(venda_img_preta, venda_img_branca, venda_link, "Ampla variedade de produtos", "Vendemos ótimos produtos de uma ampla variedade de categorias!");
+    </script>
+</body>
+</html>

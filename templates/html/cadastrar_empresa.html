@@ -1,0 +1,25 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexCRM | Cadastro de Empresa</title>
+    <link rel="stylesheet" href="{% static 'css/auth_empresa.css' %}">
+</head>
+<body>
+    <h3><a href="{% url 'landing' %}" id="logo">NexCRM</a></h3>
+    <div>
+        <h1>Cadastro de Empresas</h1>
+        <form action="" method="post">
+            {% csrf_token %}
+            <input type="text" name="dono_empresa" placeholder="Nome do dono da empresa..." required>
+            <input type="text" name="nome_empresa" placeholder="Nome da empresa..." required>
+            <input type="number" name="faturamento" placeholder="Faturamento da empresa..." required>
+            <input class="enviar_dados" type="submit" value="Enviar os dados">
+        </form>
+        <p>Já possui uma conta? <a href="{% url 'logar_empresa' %}" class="login_link">Conecte-se</a></p>
+    </div>
+</body>
+</html>
