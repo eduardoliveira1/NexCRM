@@ -1,0 +1,166 @@
+main {
+    background-color: #7335b7;
+    min-height: 74vh;
+    padding: 22px 40px;
+    color: white;
+}
+
+.filtro {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+    color: white;
+    padding: 20px;
+    background-color: #521f88;
+}
+
+.filtro input {
+    height: 30px;
+    width: 200px;
+    border: none;
+    padding: 5px;
+    background-color: white;
+}
+
+.produtos_container {
+    width: 100%;
+    gap: 40px;
+    display: flex;
+    justify-content: left;
+    flex-wrap: wrap;
+}
+
+.produto {
+    background-color: white;
+    color: black;
+    width: 300px;
+    /* min-height: 350px; */
+    height: 370px;
+    border-radius: 20px;
+    padding: 20px;
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+}
+
+.produto_image {
+    height: 40%;
+    width: 100%;
+    border-bottom: 1px solid #7335b7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 15px;
+}
+
+.produto_image img {
+    height: 100%;
+    width: auto;
+}
+
+form, .ver_detalhes {
+    width: 100%;
+}
+
+.ver_detalhes {
+    border: none;
+    font-size: 16px;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #3ed862;
+    color: white;
+    font-weight: bold;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ver_detalhes:hover, .ver_detalhes:active, #up:hover, #up:active {
+    background-color: #33af50;
+    transition: 0.5s;
+}
+
+#up {
+    position: fixed;
+    right: 40px;
+    bottom: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    background: url("../img/up_white.png") no-repeat center;
+    background-color: #3ed862;
+    background-size: 60%;
+}
+
+@media screen and (max-width: 425px) {
+    header {
+        padding: 0 20px;
+    }
+
+    .profile_btn, nav p, .nav_link {
+        display: none;
+    }
+
+    nav {
+        gap: 5px;
+    }
+
+    nav p {
+        font-size: 12px;
+    }
+
+    .mobile_menu_btn {
+        display: flex;
+    }
+
+    .mobile_menu_btn:hover {
+        background-color: #521f88;
+    }
+
+    .mobile_menu a {
+        padding: 10px 0;
+    }
+
+    .filtro h1 {
+        font-size: 24px;
+    }
+
+
+    main {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 40px;
+        padding: 20px 0;
+    }
+
+    main h1 {
+        text-align: center;
+        font-size: 20px;
+        width: 80%;
+        margin: auto;
+    }
+
+    .produtos_container {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 0;
+    }
+
+    .produto {
+        width: 80%;
+        /* height: 300px; */
+    }
+
+    #up {
+        right: 10px;
+        bottom: 10px;
+    }
+}

@@ -1,0 +1,121 @@
+body {
+    font-family: 'Montserrat';
+    display: flex;
+    flex-direction: column;
+    gap: 15vh;
+    color: black;
+    background-color: #7335b7;
+}
+
+main {
+    
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+div {
+    width: 40%;
+    height: auto;
+    padding: 20px;
+    border-radius: 20px;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffff;
+}
+
+div h1 {
+    color: #8850C9;
+    padding-bottom: 8%;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    gap: 20px;
+}
+
+form input {
+    width: 90%;
+    height: 20px;
+    font-size: 18px;
+    padding: 5px;
+    border: none;
+    border-bottom: 2px solid #8850C9;
+}
+
+form input::placeholder {
+    color: rgb(49, 49, 49);
+}
+
+.enviar_dados {
+    background-color: #2ac74f;
+    color: white;
+    cursor: pointer;
+    width: 50%;
+    height: auto;
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 20px;
+    border: none;
+    font-weight: bold;
+}
+
+.enviar_dados:hover {
+    background-color: #28A745;
+    transition: 0.5s;
+}
+
+div p {
+    margin-top: 20px;
+    font-weight: 600;
+    color: black;
+}
+
+.login_link {
+    color: #F8842B;
+    text-decoration: none;
+}
+
+.login_link:hover {
+    text-decoration: underline;
+}
+
+@media screen and (max-width: 425px) {
+    div, form {
+        width: 100%;
+        text-align: center;
+    }
+
+    #titulo_cadastro {
+        margin-bottom: 30px;
+    }
+
+    form {
+        height: 45%;
+    }
+
+    body {
+        gap: 0;
+    }
+    
+    div {
+        height: 80vh;
+        border-radius: 0;
+        /* gap: 14%; */
+        /* justify-content: center; */
+    }
+
+    div h1 {
+        padding-bottom: 20px;
+    }
+
+    .enviar_dados {
+        width: 200px;
+    }
+}

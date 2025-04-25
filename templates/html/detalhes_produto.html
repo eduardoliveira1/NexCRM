@@ -1,0 +1,87 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexCRM | Detalhes {{ produto_escolhido.nome_produto }}</title>
+    <link rel="icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/detalhes_produto.css' %}">
+</head>
+<body>
+    <header>
+        <a id="logo" href="{% url 'landing' %}"><img src="{% static 'img/logo.png' %}" alt=""></a>
+        <nav id="navigation_links">
+            <a class="nav_link" href="{% url 'landing' %}">Dashboard</a>
+            <a class="nav_link" href="{% url 'ver_produtos' %}">Ver produtos</a>
+            {% if empresa_logada %}
+            <a href="{% url 'cadastrar_produtos' %}" class="nav_link">Meus produtos</a>
+            {% elif usuario_logado %}
+            <a href="{% url 'produtos_comprados' %}" class="nav_link">Meus produtos</a>
+            {% endif %}
+        </nav>
+        <nav>
+            {% if autenticado %}
+            <p>Bem vindo,<b> {% if empresa_logada %} {{ empresa_logada.dono_empresa }} {% elif usuario_logado %} {{ usuario_logado.nome_completo }} {% endif %} </b></p>
+            <a class="profile_btn" href="{% url 'perfil' %}"><img src="{% static 'img/profile.png' %}" alt=""></a>
+            {% else %}
+            <a class="nav_link" href="{% url 'logar_usuario' %}">Logar como Usuário</a>
+            <a class="nav_link" href="{% url 'logar_empresa' %}">Logar como Empresa</a>
+            {% endif %}
+        </nav>
+
+        <button class="mobile_menu_btn" onclick="abrir_mobile_menu()"><img src="{% static 'img/mobile_menu.png' %}" alt=""></button>
+    </header>
+    <div class="mobile_menu">
+        <a href="{% url 'ver_produtos' %}">Ver produtos</a>
+        {% if autenticado %}
+        <a href="{% url 'perfil' %}">Ver perfil</a>
+            {% if empresa_logada %}
+            <a href="{% url 'cadastrar_produtos' %}">Meus produtos</a>
+            {% elif usuario_logado %}
+            <a href="{% url 'produtos_comprados' %}">Produtos comprados</a>
+            {% endif %}
+        {% else %}
+        <a href="{% url 'logar_usuario' %}">Logar como Usuário</a>
+        <a href="{% url 'logar_empresa' %}">Logar como Empresa</a>
+
+        {% endif %}
+    </div>
+    <main>
+
+    <div class="produto">
+        <div class="produto_image"><img src="{% static 'img/hero.png' %}" alt=""></div>
+        <div class="info_produto" id="info1">
+            <h1 class="nome_produto">{{ produto_escolhido.nome_produto }}</h1>
+            <h2>R${{ produto_escolhido.preco }}</h2>
+            {% if produto_escolhido.quantidade_estoque < 50 and produto_escolhido.quantidade_estoque > 0 %}
+                <p>Poucas unidades!</p>
+            {% elif produto_escolhido.quantidade_estoque == 0 %}
+                <p>Sem estoque!</p>
+            {% else %}
+                <p>+50 unidades disponíveis!</p>
+            {% endif %}
+            <form action="" method="post">
+                {% csrf_token %}    
+                <!-- <input type="number" id="quantidade" name="quantidade" min="1" max="{{ produto_escolhido.quantidade_estoque }}" > -->
+
+                <label for="unidade">Quantidade que deseja comprar:</label>
+                <input value="1" list="unidades" id="unidade" name="quantidade" min="1" max="{{ produto_escolhido.quantidade_estoque }}" />
+                <datalist id="unidades">
+                    <option value="1">
+                    <option value="2">
+                    <option value="3">
+                    <option value="4">
+                    <option value="5">
+                </datalist>
+
+                <input type="submit" class="btn_comprar" name="btn_comprar" value="Comprar">
+            </form>
+        </div>
+    </div>
+</main>
+<script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

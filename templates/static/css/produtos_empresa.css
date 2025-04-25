@@ -1,0 +1,335 @@
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    overflow: auto;
+}
+
+main {
+    /* background-color: #FFFFFF; */
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 20px 30px;
+}
+
+main h1 {
+    margin-bottom: 15px;
+}
+
+.produtos_container h1 {
+    color: #333;
+}
+
+.produto {
+    width: 66%;
+    height: 200px;
+    margin-bottom: 30px;
+    padding: 10px 30px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* gap: 20px; */
+    color: black;
+    background-color: white;
+}
+
+.produto_image {
+    height: 90%;
+    width: 30%;
+    background: url("../img/cart.png") no-repeat center;
+    background-color: white;
+    background-size: contain;
+}
+
+.produto button, #btn_edit {
+    width: 50px;
+    height: auto;
+    padding: 10px;
+    border-radius: 50%;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.btns {
+    width: auto;
+    /* height: ; */
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+#btn_edit {
+    background-color: rgb(64, 168, 202);
+}
+
+.produto button img {
+    width: 100%;
+    height: 100%;
+}
+
+.form_remover_produto {
+    display: flex;
+    gap: 15px;
+    background-color: #ed2222;
+    border-radius: 50%;
+    align-items: center;
+}
+
+.info_produto {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    gap: 20px;
+}
+
+.editar {
+    background-color: transparent;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    background: rgba(0, 0, 0, 0.7);
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.editar_container {
+    background-color: #7335b7;
+    color: white;
+    width: 35%;
+    height: 60%;
+    padding: 30px;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.fechar {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.fechar:hover {
+    background-color: #57278a;
+}
+
+.editar_container form {
+    display: flex;
+    flex-direction: column;
+}
+
+.editar_container form p {
+    margin-top: 15px;
+}
+
+.editar_container form input {
+    width: 100%;
+    border: none;
+    padding: 5px;
+    background-color: white;
+}
+
+#salvar_btn {
+    background-color: #28A745;
+    padding: 10px 0;
+    font-size: 16px;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+aside {
+    position: absolute;
+    top: 16vh;
+    right: 0;
+    height: 90%;
+    width: 30%;
+    padding: 20px;
+    color: #FFFFFF;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    background-color: #57278a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+aside h1 {
+    margin: 10px 0;
+}
+
+.cadastrar_form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+    margin-top: 10px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid white;
+}
+
+.cadastrar_form input,
+aside div input {
+    width: 90%;
+    height: 25px;
+    border-radius: 5px;
+    padding-left: 5px;
+    font-size: 16px;
+    border: none;
+}
+
+#btn_add {
+    color: #FFFFFF;
+    border: none;
+    margin-top: 10px;
+    cursor: pointer;
+    background-color: #28A745;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    font-weight: bold;
+    transition: background-color 0.5s;
+}
+
+#btn_add:hover {
+    background-color: #208839;
+}
+
+#up {
+    position: fixed;
+    right: 40px;
+    bottom: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    background: url("../img/up_white.png") no-repeat center;
+    background-color: #3ed862;
+    background-size: 60%;
+}
+
+.formulario_mobile {
+    display: none;
+}
+
+/* Responsivo */
+@media screen and (max-width: 425px) {
+    aside {
+        display: none;
+    }
+
+    .editar_container {
+        height: 70%;
+    }
+
+    main {
+        padding: 0;
+    }
+
+    main h1 {
+        /* margin-left: 20px; */
+        text-align: center;
+    }
+
+    .formulario_mobile {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        padding: 20px;
+        background-color: #57278a;
+        color: white;
+        gap: 10px;
+    }
+    
+    .formulario_mobile h1 {
+        text-align: center;
+        font-size: 24px;
+        margin-top: 0;
+    }
+
+    .formulario_mobile form,
+    .formulario_mobile div {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .formulario_mobile input {
+        width: 100%;
+        height: 30px;
+        border-radius: 5px;
+        padding-left: 5px;
+        font-size: 16px;
+        border: none;
+    }
+
+    .editar_container {
+        width: 90%;
+    }
+
+    main h1 {
+        margin-top: 60px;
+        font-size: 26px;
+    }
+
+    main h2 {
+        font-size: 20px;
+    }
+
+    .produtos_container {
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        display: flex;
+    }
+
+    .produto {
+        width: 90%;
+        flex-direction: column;
+        height: auto;
+        padding: 15px;
+        text-align: center;
+    }
+
+    .produto_image {
+        width: 100%;
+        height: 160px;
+        background-size: contain;
+    }
+
+    .btns {
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .form_remover_produto {
+        justify-content: center;
+    }
+
+    #up {
+        bottom: 10px;
+        right: 10px;
+    }
+}
+

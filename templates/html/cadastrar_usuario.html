@@ -1,0 +1,54 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexCRM | Cadastro de Usuário</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/cadastro.css' %}">
+    <link rel="icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <a id="logo" href="{% url 'landing' %}"><img src="{% static 'img/logo.png' %}" alt=""></a>
+        <nav id="navigation_links">
+            <a class="nav_link" href="{% url 'landing' %}">Dashboard</a>
+            <a class="nav_link" href="{% url 'ver_produtos' %}">Ver produtos</a>
+            {% if empresa_logada %}
+            <a href="{% url 'cadastrar_produtos' %}" class="nav_link">Meus produtos</a>
+            {% elif usuario_logado %}
+            <a href="{% url 'produtos_comprados' %}" class="nav_link">Meus produtos</a>
+            {% endif %}
+        </nav>
+        <nav>
+            {% if autenticado %}
+            <p>Bem vindo,<b> {% if empresa_logada %} {{ empresa_logada.dono_empresa }} {% elif usuario_logado %} {{ usuario_logado.nome_completo }} {% endif %} </b></p>
+            <a class="profile_btn" href="{% url 'perfil' %}"><img src="{% static 'img/profile.png' %}" alt=""></a>
+            {% else %}
+            <a class="nav_link active" href="{% url 'logar_usuario' %}">Logar como Usuário</a>
+            <a class="nav_link" href="{% url 'logar_empresa' %}">Logar como Empresa</a>
+            {% endif %}
+        </nav>
+
+        <button class="mobile_menu_btn" onclick="abrir_mobile_menu()"><img src="{% static 'img/mobile_menu.png' %}" alt=""></button>
+    </header>
+    <main>
+        
+        <div>
+            <h1 id="titulo_cadastro">Cadastro de Usuários</h1>
+            <form action="" method="post">
+                {% csrf_token %}
+                <input type="text" name="nome_completo" placeholder="Nome completo..." required>
+                <input type="email" name="email" placeholder="Email..." required>
+                <input type="password" name="senha" placeholder="Senha..." required>
+                <input type="password" name="confirm_senha" placeholder="Confirme sua senha..." required>
+                <input class="enviar_dados" type="submit" value="Enviar os dados">
+            </form>
+            <p>Já possui uma conta? <a href="{% url 'logar_usuario' %}" class="login_link">Conecte-se</a></p>
+            <p>É uma empresa? <a class="login_link" href="{% url 'cadastrar_empresa' %}">Ir para página de empresas</a></p>
+        </div>
+    </main>
+</body>
+</html>

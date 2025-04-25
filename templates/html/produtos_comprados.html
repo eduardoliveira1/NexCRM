@@ -1,0 +1,73 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/ver_produtos.css' %}">
+    <title>NexCRM | {% if empresa_logada %} {{ empresa_logada.dono_empresa }} {% elif usuario_logado %} {{ usuario_logado.nome_completo }} {% endif %}</title>
+</head>
+<body>
+    <header>
+        <a id="logo" href="{% url 'landing' %}"><img src="{% static 'img/logo.png' %}" alt=""></a>
+        <nav id="navigation_links">
+            <a class="nav_link" href="{% url 'landing' %}">Dashboard</a>
+            <a class="nav_link" href="{% url 'ver_produtos' %}">Ver produtos</a>
+            {% if empresa_logada %}
+            <a href="{% url 'cadastrar_produtos' %}" class="nav_link">Meus produtos</a>
+            {% elif usuario_logado %}
+            <a href="{% url 'produtos_comprados' %}" class="nav_link active">Meus produtos</a>
+            {% endif %}
+        </nav>
+        <nav>
+            {% if autenticado %}
+            <p>Bem vindo,<b> {% if empresa_logada %} {{ empresa_logada.dono_empresa }} {% elif usuario_logado %} {{ usuario_logado.nome_completo }} {% endif %} </b></p>
+            <a class="profile_btn" href="{% url 'perfil' %}"><img src="{% static 'img/profile.png' %}" alt=""></a>
+            {% else %}
+            <a class="nav_link" href="{% url 'logar_usuario' %}">Logar como Usuário</a>
+            <a class="nav_link" href="{% url 'logar_empresa' %}">Logar como Empresa</a>
+            {% endif %}
+        </nav>
+
+        <button class="mobile_menu_btn" onclick="abrir_mobile_menu()"><img src="{% static 'img/mobile_menu.png' %}" alt=""></button>
+    </header>
+    <div class="mobile_menu">
+        <a href="{% url 'ver_produtos' %}">Ver produtos</a>
+        {% if autenticado %}
+        <a href="{% url 'perfil' %}" id="perfil">Ver perfil</a>
+            {% if empresa_logada %}
+            <a href="{% url 'cadastrar_produtos' %}">Meus produtos</a>
+            {% elif usuario_logado %}
+            <a href="{% url 'produtos_comprados' %}">Produtos comprados</a>
+            {% endif %}
+        {% else %}
+        <a href="{% url 'logar_usuario' %}">Logar como Usuário</a>
+        <a href="{% url 'logar_empresa' %}">Logar como Empresa</a>
+
+        {% endif %}
+    </div>
+    <main>
+        <div class="produtos_container" id="produtos_container">
+            {% for produto in usuario_logado.produtos_comprados.all %}
+
+            <div class="produto">
+                <div class="produto_image"></div>
+                <input type="hidden" class="o_nome_produto" value="{{ produto.nome_produto }}">
+                <div class="info_produto" id="info1">
+                    <h3 class="nome_produto">{{ produto.nome_produto }}</h3>
+                </div>
+                <div class="info_produto">
+                    <p>Preço: R${{ produto.preco }}</p>
+                </div>
+                <a href="{% url 'detalhes_produto' %}" class="ver_detalhes">Ver detalhes</a>
+            </div>
+            {% empty %}
+            <h1>Você ainda não comprou produtos!</h1>
+            {% endfor %}
+        </div>
+    </main>
+</body>
+</html>

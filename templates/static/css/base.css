@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #7335b7;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    height: 12vh;
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header a {
+    color: white;
+}
+
+#logo:hover {
+    transform: rotate(-20deg);
+    transition: 0.5s;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+    height: 100%;
+}
+
+a {
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.nav_link, .active {
+    height: 80%;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    padding: 0 10px;
+    font-weight: bold;
+}
+
+#navigation_links  {
+    /* display: flex; */
+    gap: 30px;
+}
+
+.nav_link:hover, .nav_link:active, .active {
+    background-color: #ffffff;
+    color: black;
+    transition: 0.5s;
+}
+
+nav p {
+    text-align: right;
+}
+
+.profile_btn {
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center; 
+    padding: 2px; 
+}
+
+.profile_btn:hover {
+    background-color: #521f88;
+}
+
+.mobile_menu_btn, .mobile_menu {
+    display: none;
+}
+
+.mobile_menu {
+    flex-direction: column;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    font-weight: bold;
+    width: 100%;
+    top: 12vh;
+}
+
+.mobile_menu a {
+    color: #7335b7;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    border: 1px solid #7335b7;
+}
+
+.mobile_menu_btn {
+    border-radius: 50%;
+    padding: 5px;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border: none;
+}
+
+
+@media screen and (max-width: 435px) {
+    header {
+        padding: 0 20px;
+    }
+
+    .profile_btn, nav p, .nav_link {
+        display: none;
+    }
+
+    nav {
+        gap: 5px;
+    }
+
+    nav p {
+        font-size: 12px;
+    }
+
+    .mobile_menu_btn {
+        display: flex;
+    }
+
+    .mobile_menu_btn:hover {
+        background-color: #521f88;
+    }
+
+    .mobile_menu a {
+        padding: 10px 0;
+    }
+}

@@ -14,7 +14,11 @@ SECRET_KEY = 'django-insecure-*z@d$r_n4t515y9x&)3305c_k1^7s7x*kgt$dumsm3)5nicpnp
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
+
+# para producao:
+# DEBUG = False
+# ALLOWED_HOSTS = ['127.0.0.1', 'https://crm-nadic.fly.dev/']
 
 
 # Application definition
@@ -27,10 +31,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'empresas',
+    'usuarios',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -38,6 +45,17 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://crm-nadic.fly.dev'
+]
+
+ALLOWED_HOSTS = [
+    'crm-nadic.fly.dev',
+    '127.0.0.1',
+    'localhost'
+]
+
 
 ROOT_URLCONF = 'core.urls'
 
@@ -66,7 +84,7 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'banco.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'data', 'banco.sqlite3'),
     }
 }
 
@@ -110,6 +128,8 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     os.path.join(os.path.join(BASE_DIR, 'templates/static')),  
 ]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
