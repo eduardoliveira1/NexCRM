@@ -1,4 +1,5 @@
 .env
 .fly
+requirements.txt
 staticfiles
 venv
