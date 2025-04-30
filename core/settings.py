@@ -14,11 +14,10 @@ SECRET_KEY = 'django-insecure-*z@d$r_n4t515y9x&)3305c_k1^7s7x*kgt$dumsm3)5nicpnp
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+# ALLOWED_HOSTS = ["*"]
 
 # para producao:
 # DEBUG = False
-# ALLOWED_HOSTS = ['127.0.0.1', 'https://crm-nadic.fly.dev/']
 
 
 # Application definition
@@ -80,12 +79,14 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
+import dj_database_url
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'data', 'banco.sqlite3'),
-    }
+    'default': dj_database_url.parse(
+        'postgresql://neondb_owner:npg_Jd3BwE1yQMgL@ep-fancy-mountain-ackfywhc-pooler.sa-east-1.aws.neon.tech/neondb?sslmode=require',
+        conn_max_age=600,
+        ssl_require=True
+    )
 }
 
 
@@ -129,7 +130,10 @@ STATICFILES_DIRS = [
     os.path.join(os.path.join(BASE_DIR, 'templates/static')),  
 ]
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') 
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

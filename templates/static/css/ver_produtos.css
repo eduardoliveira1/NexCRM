@@ -25,7 +25,7 @@ main {
 }
 
 .produtos_container {
-    width: 100%;
+    width: 100vw;
     gap: 40px;
     display: flex;
     justify-content: left;
@@ -59,6 +59,7 @@ main {
 .produto_image img {
     height: 100%;
     width: auto;
+    border-radius: 20px;
 }
 
 form, .ver_detalhes {

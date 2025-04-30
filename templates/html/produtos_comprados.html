@@ -54,7 +54,13 @@
             {% for produto in usuario_logado.produtos_comprados.all %}
 
             <div class="produto">
-                <div class="produto_image"></div>
+                <div class="produto_image">
+                    {% if produto.imagem_src %}
+                    <img src="{{ produto.imagem_src.url }}" alt="">
+                    {% else %}
+                    <img src="{% static 'img/cart.png' %}" alt="">
+                    {% endif %}
+                </div>
                 <input type="hidden" class="o_nome_produto" value="{{ produto.nome_produto }}">
                 <div class="info_produto" id="info1">
                     <h3 class="nome_produto">{{ produto.nome_produto }}</h3>

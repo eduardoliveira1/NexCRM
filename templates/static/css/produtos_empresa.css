@@ -37,9 +37,24 @@ main h1 {
 .produto_image {
     height: 90%;
     width: 30%;
-    background: url("../img/cart.png") no-repeat center;
-    background-color: white;
-    background-size: contain;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#mudar_imagem_p {
+    text-align: left;
+}
+
+#nova_imagem {
+    background-color: transparent;
+    padding-left: 0;
+}
+
+.produto_image img {
+    height: 100%;
+    width: auto;
+    margin-right: 30px;
 }
 
 .produto button, #btn_edit {

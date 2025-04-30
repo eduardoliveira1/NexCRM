@@ -62,7 +62,13 @@
         {% for produto in catalogo %} 
             {% if produto.quantidade_estoque > 0 %}
             <div class="produto">
-                <div class="produto_image"><img src="{% static produto.imagem_src %}" alt=""></div>
+                <div class="produto_image">
+                    {% if produto.imagem_src %}
+                    <img src="{{ produto.imagem_src.url }}" alt="">
+                    {% else %}
+                    <img src="{% static 'img/cart.png' %}" alt="">
+                    {% endif %}
+                </div>
                 <input type="hidden" class="o_nome_produto" value="{{ produto.nome_produto }}">
                 <div class="info_produto" id="info1">
                     <h3 class="nome_produto">{{ produto.nome_produto }}</h3>

@@ -51,7 +51,7 @@
         {% if empresa_logada %}
         <div class="formulario_mobile">
             <h1>Cadastro de produtos</h1>
-            <form class="cadastrar_form" action="" method="post">
+            <form class="cadastrar_form" action="" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <input type="text" name="nome_produto" placeholder="Nome do produto...">
                 <input type="number" name="quantidade_estoque" placeholder="Quantidade em estoque...">
@@ -75,7 +75,13 @@
         <div class="produtos_container">
             {% for produto in empresa_logada.produtos.all %}
             <div class="produto">
-                <div class="produto_image"></div>
+                <div class="produto_image">
+                    {% if produto.imagem_src %}
+                    <img src="{{ produto.imagem_src.url }}" alt="">
+                    {% else %}
+                    <img src="{% static 'img/cart.png' %}" alt="">
+                    {% endif %}
+                </div>
                 <input type="hidden" class="o_nome_produto" value="{{ produto.nome_produto }}">
                 <div class="info_produto" id="info1">
                     <h3 class="nome_produto">{{ produto.nome_produto }}</h3>
@@ -86,7 +92,7 @@
                     <p>Preço: R${{ produto.preco }}</p>
                 </div>
                 <div class="btns">
-                    <form class="form_remover_produto" action="" method="post">
+                    <form class="form_remover_produto" action="" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     <input type="hidden" name="produto_id" value="{% if produto.id %}{{ produto.id }}{% else %}0{% endif %}">
                     <button type="submit" id="remove_btn" name="btn_remove" value="remover"><img src="{% static 'img/trash.png' %}"></button>
@@ -114,12 +120,12 @@
         </div>
     <aside>
         <h1>Cadastro de produtos</h1>
-    <form class="cadastrar_form" action="" method="post">
+    <form class="cadastrar_form" action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <input type="text" name="nome_produto" placeholder="Nome do produto...">
         <input type="number" name="quantidade_estoque" placeholder="Quantidade em estoque...">
         <input type="number" name="preco" placeholder="Preço do produto (R$)...">
-        <p>Imagem do produto:</p>
+        <p id="mudar_imagem_p">Imagem do produto:</p>
         <input type="file" name="imagem_produto">
         <input id="btn_add" type="submit" name="btn_add" value="Cadastrar">
     </form>
@@ -139,7 +145,7 @@
         </div>
         <div class="div_form">
 
-            <form action="" method="post">
+            <form action="" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <input type="hidden" name="produto_id" id="input_produto_id">
                 
@@ -153,7 +159,7 @@
                 <input type="number" name="novo_preco" id="input_preco" placeholder="Mudar preço(R$)">
 
                 <p>Mudar imagem</p>
-                <input type="image" name="nova_imagem" value="mudar_imagem">
+                <input type="file" id="nova_imagem" name="nova_imagem" value="img_{{produto.id}}">
                 
                 <input type="submit" id="salvar_btn" value="Salvar" name="salvar">
             </form>

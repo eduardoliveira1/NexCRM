@@ -5,12 +5,6 @@ class Empresa(models.Model):
     dono_empresa = models.CharField(max_length=150, default='dono da empresa')
     nome_empresa = models.CharField(max_length=80, unique=True)
     faturamento = models.FloatField(default=0)
-    
-    def adicionar_produto(self, id_produto):
-        produto = Produto.objects.get(id=id_produto)
-        if produto:
-            produto.empresa = self
-            produto.save()
         
     def remover_produto(self, id_produto):
         # produto = Produto.objects.get(id=id_produto, empresa=self)
@@ -31,8 +25,8 @@ class Produto(models.Model):
     quantidade_estoque = models.IntegerField(default=0)
     preco = models.FloatField(default=0)
     empresa = models.ForeignKey(Empresa, on_delete=models.CASCADE, null=True, related_name='produtos') 
-    imagem_src = models.ImageField(upload_to='templates/static/img/', default="templates/static/img/cart.png")
-    
+    imagem_src = models.ImageField(upload_to='produtos/', default="produtos/cart.png")
+
     def editar_nome_produto(self, novo_nome):
         self.nome_produto = novo_nome
         self.save()
@@ -46,5 +40,6 @@ class Produto(models.Model):
         self.save()
         
     def mudar_imagem(self, caminho_imagem):
+        self.imagem_src.delete()
         self.imagem_src = caminho_imagem
-        self.save()
+        self.save() 

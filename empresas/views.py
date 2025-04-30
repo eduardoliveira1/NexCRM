@@ -72,46 +72,50 @@ def cadastrar_produtos(request):
     usuario_logado = get_usuario_logado(request)
     
     if request.method == 'POST':
-        nome_produto = request.POST.get('nome_produto')
-        quantidade_estoque = request.POST.get('quantidade_estoque')
-        preco = request.POST.get('preco')
-        
-        produto_id = request.POST.get("produto_id")
-        novo_nome = request.POST.get("novo_nome_produto")
-        nova_quantidade = request.POST.get("nova_quantidade")
-        novo_preco = request.POST.get("novo_preco")
+        if 'btn_add' in request.POST and empresa_logada:
+            nome = request.POST.get('nome_produto')
+            quantidade = request.POST.get('quantidade_estoque')
+            preco = request.POST.get('preco')
+            imagem = request.FILES.get('imagem_produto') 
 
-        produto_escolhido = Produto.objects.filter(id=produto_id).first()
-
-        if produto_escolhido:
-            if novo_nome:
-                produto_escolhido.editar_nome_produto(novo_nome)
-                # messages.info(request, f"Produto editado com sucesso!")
-            if nova_quantidade:
-                produto_escolhido.editar_quantidade_estoque(nova_quantidade)
-            if novo_preco:
-                produto_escolhido.editar_preco(novo_preco)
-        else:
-            print(f"nao encontramos o produto")
-        
-        btn_add = request.POST.get('btn_add')
-        btn_remove = request.POST.get('btn_remove')
-        
-        if btn_add:
             produto = Produto(
-                nome_produto = nome_produto,
-                quantidade_estoque = quantidade_estoque,
-                preco = preco,
+                nome_produto=nome,
+                quantidade_estoque=quantidade,
+                preco=preco,
+                imagem_src=imagem,
                 empresa=empresa_logada
             )
             produto.save()
-            empresa_logada.adicionar_produto(produto.id)
-        
-        if btn_remove:
-            id_produto_escolhido = request.POST.get('produto_id')
-            produto = Produto.objects.filter(id=id_produto_escolhido, empresa=empresa_logada).first()
+            # messages.success(request, 'Produto cadastrado com sucesso!')
+
+        # Remover produto
+        elif 'btn_remove' in request.POST and empresa_logada:
+            produto_id = request.POST.get('produto_id')
+            empresa_logada.remover_produto(produto_id)
+            # Produto.objects.filter(id=produto_id, empresa=empresa_logada).delete()
+            # messages.success(request, 'Produto removido com sucesso!')
+
+        # Editar produto
+        elif 'salvar' in request.POST and empresa_logada:
+            produto_id = request.POST.get('produto_id')
+            novo_nome = request.POST.get('novo_nome_produto')
+            nova_quantidade = request.POST.get('nova_quantidade')
+            novo_preco = request.POST.get('novo_preco')
+            nova_imagem = request.FILES.get('nova_imagem')
+
+            produto = Produto.objects.filter(id=produto_id, empresa=empresa_logada).first()
             if produto:
-                empresa_logada.remover_produto(id_produto_escolhido)
+                if novo_nome:
+                    produto.nome_produto = novo_nome
+                if nova_quantidade:
+                    produto.quantidade_estoque = int(nova_quantidade)
+                if novo_preco:
+                    produto.preco = float(novo_preco)
+                if nova_imagem:
+                    produto.imagem_src = nova_imagem
+                produto.save()
+                messages.success(request, 'Produto editado com sucesso!')
+            return redirect('cadastrar_produtos')
     
     context = {
         'usuario_logado' : usuario_logado,

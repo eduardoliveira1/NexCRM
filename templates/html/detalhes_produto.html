@@ -52,7 +52,15 @@
     <main>
 
     <div class="produto">
-        <div class="produto_image"><img src="{% static 'img/hero.png' %}" alt=""></div>
+        <div class="produto_image">
+            <div class="produto_image">
+                {% if produto_escolhido.imagem_src %}
+                <img src="{{ produto_escolhido.imagem_src.url }}" alt="">
+                {% else %}
+                <img src="{% static 'img/cart.png' %}" alt="">
+                {% endif %}
+            </div>
+        </div>
         <div class="info_produto" id="info1">
             <h1 class="nome_produto">{{ produto_escolhido.nome_produto }}</h1>
             <h2>R${{ produto_escolhido.preco }}</h2>

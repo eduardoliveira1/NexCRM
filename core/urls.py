@@ -1,6 +1,8 @@
 from django.urls import path, include
 from empresas import views as empresas_views
 from usuarios import views as usuario_views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('', empresas_views.landing, name='landing'),
@@ -17,4 +19,4 @@ urlpatterns = [
     path('auth/perfil', empresas_views.perfil, name='perfil'),
     path('auth/produtos_comprados', empresas_views.produtos_comprados, name='produtos_comprados'),
     path('auth/ver_produtos/detalhes_produto', empresas_views.detalhes_produto, name='detalhes_produto'),
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
