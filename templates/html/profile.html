@@ -54,7 +54,11 @@
         {% if autenticado %}
         <section class="profile_container">
             {% if empresa_logada %}
-            <div class="image_empresa"><img src="{% static 'img/empresa.jpeg' %}" alt=""></div>
+                {% if empresa_logada.imagem_perfil %}
+                    <div class="image_empresa"><img src="{{ empresa_logada.imagem_perfil.url }}" alt=""></div>
+                {% else %}
+                    <div class="image_empresa"><img src="{% static 'img/empresa.jpeg' %}" alt=""></div>
+                {% endif %}
             {% elif usuario_logado %}
             <div class="image_empresa" id="image_user"><img src="{% static 'img/perfil.png' %}" alt=""></div>
             {% endif %}
@@ -81,8 +85,10 @@
             </div>
 
             <div class="editar">
-                <form action="" method="post">
+                <form action="" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
+                    <label for="">Mudar imagem de perfil:</label>
+                    <input type="file" name="nova_imagem" id="nova_imagem" accept="image/*">
                     {% if empresa_logada %}
                     <label for="">Novo dono da empresa:</label>
                     <input type="text" name="dono_empresa" placeholder="{{ empresa_logada.dono_empresa}}">

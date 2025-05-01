@@ -1,6 +1,7 @@
 from .models import Empresa
 from usuarios.models import Usuario, Produto
 
+
 def get_empresa_logada(request):
     empresa_logada_id = request.session.get('empresa_logada_id')
     if empresa_logada_id:
@@ -34,6 +35,7 @@ def efetuar_login_usuario(email, senha):
     return None
 
 def get_produto_escolhido(request):
+    
     produto_escolhido_id = request.session.get('produto_escolhido_id')
     if produto_escolhido_id:
         try:

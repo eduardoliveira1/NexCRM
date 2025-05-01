@@ -1,5 +1,8 @@
 .env
 .fly
-requirements.txt
+.fly/bin
 staticfiles
 venv
+.dockerignore
+Dockerfile
+fly.toml

@@ -48,6 +48,7 @@
     </div>
 
     <main>
+        {% include "messages.html" %}
         {% if empresa_logada %}
         <div class="formulario_mobile">
             <h1>Cadastro de produtos</h1>
@@ -56,6 +57,7 @@
                 <input type="text" name="nome_produto" placeholder="Nome do produto...">
                 <input type="number" name="quantidade_estoque" placeholder="Quantidade em estoque...">
                 <input type="number" name="preco" placeholder="Preço do produto (R$)...">
+                <textarea name="descricao" placeholder="Descrição do produto" id="descricao"></textarea>
                 <p>Imagem do produto:</p>
                 <input type="file" name="imagem_produto">
                 <input id="btn_add" type="submit" name="btn_add" value="Cadastrar">
@@ -110,8 +112,6 @@
                 <img src="{% static 'img/pencil.png' %}">
                 </button>
                 </div>
-
-                <!-- <button name="btn_edit" onclick="editar_produto()" value="editar"><img src="{% static 'img/pencil.png' %}"></button> -->
             </div>
 
             {% empty %}
@@ -125,6 +125,7 @@
         <input type="text" name="nome_produto" placeholder="Nome do produto...">
         <input type="number" name="quantidade_estoque" placeholder="Quantidade em estoque...">
         <input type="number" name="preco" placeholder="Preço do produto (R$)...">
+        <textarea name="descricao" placeholder="Descrição do produto" id="descricao"></textarea>
         <p id="mudar_imagem_p">Imagem do produto:</p>
         <input type="file" name="imagem_produto">
         <input id="btn_add" type="submit" name="btn_add" value="Cadastrar">
@@ -157,6 +158,9 @@
             
                 <p>Mudar preço:</p>
                 <input type="number" name="novo_preco" id="input_preco" placeholder="Mudar preço(R$)">
+
+                <p>Nova descrição:</p>
+                <textarea name="nova_descricao" placeholder="{% if produto.descricao %}{{ produto.descricao }} {% else %} Descrição do produto... {% endif %}" id="descricao"></textarea>
 
                 <p>Mudar imagem</p>
                 <input type="file" id="nova_imagem" name="nova_imagem" value="img_{{produto.id}}">

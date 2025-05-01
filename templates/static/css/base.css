@@ -22,6 +22,29 @@ header {
     align-items: center;
 }
 
+.messages {
+    position: absolute;
+    width: 100vw;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    background-color: transparent;
+}
+
+.message p {
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.success {
+    background-color: rgb(96, 223, 96);
+}
+
+.error {
+    background-color: rgb(224, 95, 95);
+}
+
 header a {
     color: white;
 }

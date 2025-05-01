@@ -50,6 +50,7 @@
         {% endif %}
     </div>
     <main>
+        {% include "messages.html" %}
 
     <div class="produto">
         <div class="produto_image">
@@ -63,6 +64,9 @@
         </div>
         <div class="info_produto" id="info1">
             <h1 class="nome_produto">{{ produto_escolhido.nome_produto }}</h1>
+            <h3>
+                {% if produto_escolhido.descricao %}{{ produto_escolhido.descricao }} {% else %} {% endif %}
+            </h3>
             <h2>R${{ produto_escolhido.preco }}</h2>
             {% if produto_escolhido.quantidade_estoque < 50 and produto_escolhido.quantidade_estoque > 0 %}
                 <p>Poucas unidades!</p>

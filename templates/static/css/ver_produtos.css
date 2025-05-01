@@ -1,7 +1,7 @@
 main {
     background-color: #7335b7;
     min-height: 74vh;
-    padding: 22px 40px;
+    padding: 22px 0px;
     color: white;
 }
 
@@ -25,10 +25,10 @@ main {
 }
 
 .produtos_container {
-    width: 100vw;
-    gap: 40px;
+    width: 98vw;
+    gap: 30px;
     display: flex;
-    justify-content: left;
+    justify-content: center;  
     flex-wrap: wrap;
 }
 

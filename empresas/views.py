@@ -15,6 +15,7 @@ def cadastrar_empresa(request):
             nome_empresa = nome_empresa
         )
         empresa.save()
+        messages.success(request, 'Sua empresa foi cadastrada com sucesso!')
         
         request.session['empresa_logada_id'] = empresa.id
         
@@ -32,6 +33,7 @@ def logar_empresa(request):
         
         if empresa_logada:
             request.session['empresa_logada_id'] = empresa_logada.id
+            messages.success(request, 'Login efetuado com sucesso!')
             return redirect('landing')    
         
     return render(request, 'logar_empresa.html')
@@ -39,7 +41,6 @@ def logar_empresa(request):
 def perfil(request):
     empresa_logada = get_empresa_logada(request)
     usuario_logado = get_usuario_logado(request)
-    
     
     context = {
         'usuario_logado' : usuario_logado,
@@ -52,6 +53,7 @@ def perfil(request):
         novo_dono_empresa = request.POST.get('dono_empresa')
         novo_nome_empresa = request.POST.get('nome_empresa')
         novo_email = request.POST.get('novo_email')
+        nova_imagem = request.FILES.get('nova_imagem')
         
         if novo_dono_empresa:
             empresa_logada.editar_dono_empresa(novo_dono_empresa)
@@ -59,6 +61,9 @@ def perfil(request):
             empresa_logada.editar_nome_empresa(novo_nome_empresa)
         if novo_email:
             usuario_logado.editar_email(novo_email)
+        if nova_imagem and empresa_logada:
+            empresa_logada.mudar_foto_perfil(nova_imagem)
+        messages.success(request, "Perfil alterado com sucesso!")
         
         if deslogar:
             request.session['empresa_logada_id'] = None
@@ -86,33 +91,34 @@ def cadastrar_produtos(request):
                 empresa=empresa_logada
             )
             produto.save()
-            # messages.success(request, 'Produto cadastrado com sucesso!')
+            messages.success(request, 'Produto cadastrado com sucesso!')
 
-        # Remover produto
         elif 'btn_remove' in request.POST and empresa_logada:
             produto_id = request.POST.get('produto_id')
             empresa_logada.remover_produto(produto_id)
-            # Produto.objects.filter(id=produto_id, empresa=empresa_logada).delete()
-            # messages.success(request, 'Produto removido com sucesso!')
+            messages.success(request, 'Produto removido com sucesso!')
 
-        # Editar produto
         elif 'salvar' in request.POST and empresa_logada:
             produto_id = request.POST.get('produto_id')
             novo_nome = request.POST.get('novo_nome_produto')
             nova_quantidade = request.POST.get('nova_quantidade')
             novo_preco = request.POST.get('novo_preco')
             nova_imagem = request.FILES.get('nova_imagem')
+            nova_descricao = request.POST.get('nova_descricao')
 
             produto = Produto.objects.filter(id=produto_id, empresa=empresa_logada).first()
             if produto:
                 if novo_nome:
-                    produto.nome_produto = novo_nome
+                    produto.editar_nome_produto(novo_nome)
                 if nova_quantidade:
-                    produto.quantidade_estoque = int(nova_quantidade)
+                    produto.editar_quantidade_estoque(nova_quantidade)
                 if novo_preco:
-                    produto.preco = float(novo_preco)
+                    produto.editar_preco(novo_preco)
                 if nova_imagem:
-                    produto.imagem_src = nova_imagem
+                    produto.mudar_imagem(nova_imagem)
+                if nova_descricao:
+                    produto.mudar_descricao(nova_descricao)
+                    pass
                 produto.save()
                 messages.success(request, 'Produto editado com sucesso!')
             return redirect('cadastrar_produtos')
@@ -189,5 +195,9 @@ def detalhes_produto(request):
         
         if btn_comprar and usuario_logado:
             usuario_logado.comprar_produto(produto_escolhido, quantidade)
+            messages.success(request, 'Produto comprado com sucesso!')
+        elif usuario_logado is None:
+            messages.error(request, "Erro: conecte-se como usuário!")
+            
     
     return render(request, 'detalhes_produto.html', context)
